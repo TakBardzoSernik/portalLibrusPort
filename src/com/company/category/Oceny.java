@@ -24,20 +24,20 @@ public class Oceny {
 
     List<Ocena> ocenyS1 = new ArrayList<>();
     List<Ocena> ocenyS2 = new ArrayList<>();
-    Ocena semestralna1;
-    Ocena semestralna2;
-    Ocena koncowa;
+    Ocena semestralna1 = new Ocena();
+    Ocena semestralna2 = new Ocena();
+    Ocena koncowa = new Ocena();
     Przedmiot[] przedmioty;
 
     private void ocenySemestru(List<Ocena> semestr, Elements cells, int searchIndex, int iPrzedmiot){
         Elements spans = cells.get(searchIndex).select("span");
         for(Element span : spans) {
             semestr.add(new Ocena(span, iPrzedmiot));
-        };
+        }
     }
     private void ocenaIndywidualna(Ocena ocena,  Elements cells, int searchIndex, int iPrzedmiot){
         Element span = cells.get(searchIndex).selectFirst("span");
-        if(span != null) ocena = new Ocena(span, iPrzedmiot);
+        if(span != null) ocena.extractSpan(span, iPrzedmiot);
     }
 
     public void collectData(Document htmlDoc){
@@ -71,7 +71,7 @@ public class Oceny {
             //Ocena Końcowa
             ocenaIndywidualna(koncowa, cells, iFinal, i);
             i++;
-        };
+        }
 
         //Print semestr 1
         int pCounter = 0;
@@ -85,7 +85,7 @@ public class Oceny {
             pCounter++;
         }
     }
-    public void Oceny(Document htmlDoc){
+    public Oceny(Document htmlDoc){
         collectData(htmlDoc);
     }
 }

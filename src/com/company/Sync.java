@@ -17,7 +17,6 @@ public class Sync {
         //cut string after second space
         login.setUser(str.substring(0, str.indexOf(" ", str.indexOf(" ") + 1)));
 
-        login.oceny = new Oceny();
-        login.oceny.collectData(Main.htmlDoc);
+        login.oceny = new Oceny(Main.htmlDoc);
     }
 }
